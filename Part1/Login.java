@@ -37,4 +37,71 @@ public class Login {
         return Pattern.matches(regex, cellPhoneNumber);
     }
 
+    public String registerUser(String username, String password, String cellPhoneNumber,
+                                String firstName, String lastName) {
+
+        boolean usernameOk = checkUserName(username);
+        boolean passwordOk = checkPasswordComplexity(password);
+        boolean cellOk = checkCellPhoneNumber(cellPhoneNumber);
+
+        StringBuilder message = new StringBuilder();
+
+        if (!usernameOk) {
+            message.append("Username is not correctly formatted; please ensure that your username "
+                    + "contains an underscore and is no more than five characters in length.");
+        }
+
+        if (!passwordOk) {
+            if (message.length() > 0) {
+                message.append(" ");
+            }
+            message.append("Password is not correctly formatted; please ensure that the password "
+                    + "contains at least eight characters, a capital letter, a number, and a special character.");
+        }
+
+        if (!cellOk) {
+            if (message.length() > 0) {
+                message.append(" ");
+            }
+            message.append("Cell phone number is incorrectly formatted or does not contain "
+                    + "international code, please correct the number and try again.");
+        }
+
+        if (usernameOk && passwordOk && cellOk) {
+            this.username = username;
+            this.password = password;
+            this.cellPhoneNumber = cellPhoneNumber;
+            this.firstName = firstName;
+            this.lastName = lastName;
+
+            message.append("Username successfully captured. Password successfully captured. "
+                    + "Cell phone number successfully captured. User registered successfully.");
+        }
+
+        return message.toString();
+    }
+
+    public boolean loginUser(String username, String password) {
+        if (this.username == null || this.password == null) {
+            return false;
+        }
+        return this.username.equals(username) && this.password.equals(password);
+    }
+
+    public String returnLoginStatus(boolean loginSuccessful) {
+        if (loginSuccessful) {
+            return "Welcome " + firstName + " " + lastName + ", it is great to see you again.";
+        } else {
+            return "Username or password incorrect, please try again.";
+        }
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
 }
