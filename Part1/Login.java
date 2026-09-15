@@ -9,4 +9,11 @@ public class Login {
     public Login() {
     }
 
+    public boolean checkUserName(String username) {
+        if (username == null) {
+            return false;
+        }
+        return username.contains("_") && username.length() <= 5;
+    }
+
 }
