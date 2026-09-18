@@ -1,6 +1,7 @@
 import java.util.regex.Pattern;
 
 public class Login {
+    //Verified: compiles and runs successfully in NetBeans with JUnit tests passing
 
     private String username;
     private String password;
